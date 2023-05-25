@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ProfilComponent } from './profil/profil.component';
+import { ComptesComponent } from './comptes/comptes.component';
 import { AdminComponent } from './admin/admin.component';
 
 
@@ -19,6 +20,7 @@ import { AdminComponent } from './admin/admin.component';
     HomeComponent,
     NavbarComponent,
     ProfilComponent,
+    ComptesComponent
     AdminComponent
   ],
   imports: [

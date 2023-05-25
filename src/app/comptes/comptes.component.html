@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+    </symbol>
+  </svg>
+
+<div class="form-body">
+    <div class="row">
+        <div class="form-holder">
+            <div class="form-content">
+                <div class="form-items">
+                    <h3>Créer un nouveau Collaborateur</h3>
+                    <p>Veuillez Remplir tous les champs</p>
+                    <form class="requires-validation" novalidate>
+
+                        <div class="col-md-12">
+                            <select class="form-select mt-3" [(ngModel)]="type" name="type" required>
+                                <option selected disabled value="">Position</option>
+                                <option value="collab">collab</option>
+                                <option value="admin">admin</option>
+                                <option value="respoFinancier">respoFinancier</option>
+                            </select>
+                            <div class="valid-feedback">Vous avez bien sélectionné une position!</div>
+                            <div class="invalid-feedback">Merci de sélectionner une position</div>
+                        </div>
+                        
+
+                        
+                        <div class="col-md-12">
+                            <input class="form-control" [(ngModel)]="nom" name="nom" type="text" placeholder="Nom" required>
+                            <div class="valid-feedback">Nom valide!</div>
+                            <div class="invalid-feedback">Nom ne peut pas être vide!</div>
+                        </div>
+                        
+                        <div class="col-md-12">
+                            <input class="form-control" [(ngModel)]="prenom" name="prenom" type="text" placeholder="Prenom" required>
+                            <div class="valid-feedback">Prenom Valide!</div>
+                            <div class="invalid-feedback">Prenom ne peut pas être vide!</div>
+                        </div>
+                        
+                        <div class="col-md-12">
+                            <input class="form-control" [(ngModel)]="username" name="username" type="text" placeholder="Username" required>
+                            <div class="valid-feedback">Username Valide!</div>
+                            <div class="invalid-feedback">Username ne peut pas être vide!</div>
+                        </div>
+                        
+                        <div class="col-md-12">
+                            <input class="form-control" [(ngModel)]="password" name="password" type="password" placeholder="Password" required>
+                            <div class="valid-feedback">Password field is valid!</div>
+                            <div class="invalid-feedback">Password field cannot be blank!</div>
+                        </div>
+                        
+                        <!-- Success Alert -->
+                        <div class="form-button mt-3">
+                            <button id="submit" type="submit" class="btn btn-primary" (click)=handleRegister()>Register</button>
+                            
+                            <div class="alert alert-success alert-dismissible d-flex align-items-center fade show" *ngIf='validRegister'>
+                                <i class="bi-check-circle-fill"></i>
+                                <strong class="mx-2">Success!</strong> {{type}} crée avec succès .
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                            
+                            <!-- Error Alert -->
+                            <div class="alert alert-danger alert-dismissible d-flex align-items-center fade show" *ngIf='invalidRegister' >
+                                <i class="bi-exclamation-octagon-fill"></i>
+                                <strong class="mx-2">Error!</strong> {{errorMessage}} .
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
