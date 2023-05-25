@@ -16,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PopUpAdminComponent } from './pop-up-admin/pop-up-admin.component';
 import { FinancierComponent } from './financier/financier.component';
 import { PopUpBesoinComponent } from './pop-up-besoin/pop-up-besoin.component';
+import { CollabComponent } from './collab/collab.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { PopUpBesoinComponent } from './pop-up-besoin/pop-up-besoin.component';
     PopUpAdminComponent,
     FinancierComponent,
     PopUpBesoinComponent,
+    CollabComponent,
   ],
   imports: [
     BrowserModule,

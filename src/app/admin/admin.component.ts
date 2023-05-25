@@ -16,10 +16,13 @@ export class AdminComponent implements OnInit{
 
   projets?: any;
 
-  intituleProjet?: string;
+  intituleProjet = ""
   budgetProjet?: number;
 
   closeResult?: string;
+
+  messageErreur = ""
+  
 
 
   constructor(
@@ -34,6 +37,10 @@ export class AdminComponent implements OnInit{
       this.router.navigateByUrl("/login")
     }
 
+    if(this.auth.getType() != "admin") {
+      this.router.navigateByUrl("/home")
+    }
+
     this.messageService.sendGet("projet/all").subscribe(res => {
       this.projets = res.data;
     })
@@ -41,9 +48,16 @@ export class AdminComponent implements OnInit{
 
   addCollab() {
       this.messageService.sendPost("projet/add", {intituleProjet: this.intituleProjet, budgetProjet: this.budgetProjet}).subscribe(res => {
-        this.projets.push(res.data);
-        this.intituleProjet = "";
-        this.budgetProjet = undefined;
+        if(res.status == "OK") {
+          this.projets.push(res.data);
+          this.intituleProjet = "";
+          this.budgetProjet = undefined;
+          this.messageErreur = ""
+        } else {
+          console.log(res.data)
+          this.messageErreur = res.data
+        }
+
       })
     }
 

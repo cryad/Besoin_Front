@@ -30,9 +30,12 @@ export class FinancierComponent implements OnInit{
     if(!this.auth.isAuthenticated()) {
       this.router.navigateByUrl("/login")
     }
-    this.codeCollab = this.auth.getCodeCollab()
-    console.log(this.codeCollab)
 
+    if(this.auth.getType() != "respoFinancier") {
+      this.router.navigateByUrl("/home")
+    }
+
+    this.codeCollab = this.auth.getCodeCollab()
     this.getProjetsByCollab(this.codeCollab);
 
 
