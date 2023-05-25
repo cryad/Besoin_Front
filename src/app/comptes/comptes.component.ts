@@ -32,7 +32,7 @@ export class ComptesComponent implements OnInit{
   }
 
     handleRegister() {
-      this.messageService.sendMessage("register", {nom: this.nom, prenom: this.prenom, username: this.username, password: this.password, discriminateur: this.type}).subscribe(res => {
+      this.messageService.sendPost("register", {nom: this.nom, prenom: this.prenom, username: this.username, password: this.password, discriminateur: this.type}).subscribe(res => {
         console.log(res.data)
         if(res.status == "OK") {
           this.http.get(hostUrl+"type/"+res.data.codeCollab).subscribe(collab => {
