@@ -1,0 +1,33 @@
+<div class="table-custom">
+<table class="table table-bordered" >
+    <thead>
+      <tr>
+        <th scope="col">#codeProjet</th>
+        <th scope="col">Intitulé</th>
+        <th scope="col">Budget</th>
+        <th scope="col">Statut</th>
+        <th scope="col">Modification</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let projet of projets">
+        <th scope="row">{{projet.codeProjet}}</th>
+        <td>{{projet.intituleProjet}} (click)="open(content)"</td>
+        <td>{{projet.budgetProjet}}</td>
+        <td>{{projet.valideP}}</td>
+        <td><button type="button" class="btn btn-primary">voir</button></td>
+      </tr>
+      <tr class="table-color-add">
+        <th scope="row">#</th>
+        <td><input type="text" class="form-control" [(ngModel)]="intituleProjet"></td>
+        <td><input type="text" class="form-control" [(ngModel)]="budgetProjet"></td>
+        <td><input type="text" class="form-control" disabled class="disabled-input"></td>
+        <td><button type="button" class="btn btn-primary" disabled>voir</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button type="button" class="btn btn-success" (click)="addCollab()">Ajouter le projet</button>
+
+</div>
+
