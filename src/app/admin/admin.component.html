@@ -12,10 +12,10 @@
     <tbody>
       <tr *ngFor="let projet of projets">
         <th scope="row">{{projet.codeProjet}}</th>
-        <td>{{projet.intituleProjet}} (click)="open(content)"</td>
+        <td>{{projet.intituleProjet}}</td>
         <td>{{projet.budgetProjet}}</td>
         <td>{{projet.valideP}}</td>
-        <td><button type="button" class="btn btn-primary">voir</button></td>
+        <td><button type="button" class="btn btn-primary" (click)="openDialog(projet.codeProjet)">voir</button></td>
       </tr>
       <tr class="table-color-add">
         <th scope="row">#</th>

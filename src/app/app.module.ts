@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { MatDialogModule } from '@angular/material/dialog'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +12,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ProfilComponent } from './profil/profil.component';
 import { ComptesComponent } from './comptes/comptes.component';
 import { AdminComponent } from './admin/admin.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PopUpAdminComponent } from './pop-up-admin/pop-up-admin.component';
 
 
 @NgModule({
@@ -21,13 +24,16 @@ import { AdminComponent } from './admin/admin.component';
     NavbarComponent,
     ProfilComponent,
     ComptesComponent,
-    AdminComponent
+    AdminComponent,
+    PopUpAdminComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
