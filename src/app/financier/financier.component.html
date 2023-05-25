@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="table-custom center-table">
+        <table class="table table-bordered" >
+            <thead>
+            <tr>
+                <th scope="col">#codeProjet</th>
+                <th scope="col">Intitulé</th>
+                <th scope="col">Budget</th>
+                <th scope="col">Statut</th>
+                <th scope="col">Besoins</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let projet of projets">
+                <th scope="row">{{projet.codeProjet}}</th>
+                <td>{{projet.intituleProjet}}</td>
+                <td>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        <span class="input-group-text">{{projet.budgetProjet}} $</span>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-outline-danger btn-rounded" *ngIf="!projet.valideP" data-mdb-ripple-color="dark" (click)="validateProjet(projet)">Clique pour valider</button>
+                    <div class="alert alert-success" *ngIf="projet.valideP" role="alert">
+                        Ce projet est validé
+                    </div>
+                </td>
+                <td><button type="button" class="btn btn-primary" (click)="openDialog(projet.codeProjet)">Voir</button></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -22,5 +22,6 @@ export class PopUpAdminComponent implements OnInit{
           console.log(this.Collaborateurs);
         })
     }
+    
 
 }
