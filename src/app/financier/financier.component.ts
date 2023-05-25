@@ -13,11 +13,9 @@ import { PopUpBesoinComponent } from '../pop-up-besoin/pop-up-besoin.component';
 export class FinancierComponent implements OnInit{
 
   projets?: any;
-
-  intituleProjet = "Intitule";
-  budgetProjet = 0;
   codeCollab: any;
   selectedProjet: any;
+  totalBesoin: number = 0;
 
   constructor(
     private auth: AuthServiceModule,
@@ -34,8 +32,6 @@ export class FinancierComponent implements OnInit{
     console.log(this.codeCollab)
 
     this.getProjetsByCollab(this.codeCollab);
-
-
   }
 
   getProjetsByCollab(codeCollab: any) {
@@ -51,11 +47,15 @@ export class FinancierComponent implements OnInit{
     this.messageService.sendPut("projet/validate/"+selectedProjet.codeProjet, {}).subscribe(res => {
       console.log(res)
 
+      this.getProjetsByCollab(this.codeCollab);
+
+      /*
       this.projets.forEach((projet: any) => {
         if(projet.codeProjet == selectedProjet.codeProjet) {
           projet.valideP = true;
         }
       });
+      */
     })
   }
 
@@ -65,5 +65,8 @@ export class FinancierComponent implements OnInit{
         codeProjet: codeP
       }
     })
+    this.getProjetsByCollab(this.codeCollab);
   }
 }
+
+

@@ -5,7 +5,8 @@
             <tr>
                 <th scope="col">#codeProjet</th>
                 <th scope="col">Intitulé</th>
-                <th scope="col">Budget</th>
+                <th scope="col">Budget Alloué</th>
+                <th scope="col">Total des Besoins</th>
                 <th scope="col">Statut</th>
                 <th scope="col">Besoins</th>
             </tr>
@@ -18,6 +19,17 @@
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                         <span class="input-group-text">{{projet.budgetProjet}} $</span>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend" *ngIf="projet.totalBesoin <= projet.budgetProjet">
+                            <span class="input-group-text" style="background-color: rgb(150, 204, 128);">{{projet.totalBesoin}} $</span>
+                        </div>
+                        <div class="input-group-prepend" *ngIf="projet.totalBesoin > projet.budgetProjet">
+                            <span class="input-group-text" style="background-color: rgb(201, 100, 107);">{{projet.totalBesoin}} $</span>  
+                            <p style="color: red;">Le budget alloué est insuffisant</p>                      
                         </div>
                     </div>
                 </td>
