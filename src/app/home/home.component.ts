@@ -9,8 +9,7 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  type: any = ""
-  selectedProject: any = null;
+  type: any = "";
 
   constructor(private auth: AuthServiceModule, private router: Router) { }
 
@@ -24,9 +23,5 @@ export class HomeComponent implements OnInit {
       this.type = this.auth.getType();
   }
 
-  selectProject(project: any) {
-    this.selectedProject = project;
-    // Vous pouvez effectuer d'autres actions ici en fonction de la ligne sélectionnée
-  }
 
 }
