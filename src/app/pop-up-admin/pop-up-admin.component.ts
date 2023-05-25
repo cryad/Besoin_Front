@@ -10,7 +10,10 @@ import { MessageService } from 'src/message/message.service';
 export class PopUpAdminComponent implements OnInit{
 
     codeProjet?: number;
-    Collaborateurs?: any;
+    collaborateurs?: any;
+    collabNotInProjets?: any;
+    selectedOption?: any;
+
 
     constructor(@Inject(MAT_DIALOG_DATA) public data: any, private messageService: MessageService) {
       this.codeProjet = data.codeProjet;
@@ -18,9 +21,28 @@ export class PopUpAdminComponent implements OnInit{
 
     ngOnInit() {
         this.messageService.sendGet("collab/In/"+this.codeProjet).subscribe(res => {
-          this.Collaborateurs = res.data;
-          console.log(this.Collaborateurs);
+          this.collaborateurs = res.data;
+        })
+
+        this.messageService.sendGet("collab/notIn/"+this.codeProjet).subscribe(res => {
+          console.log(res.data)
+          this.collabNotInProjets = res.data;
         })
     }
+
+    addCollab() {
+      this.messageService.sendPost("besoin/assign", {codeCollab: this.selectedOption.codeCollab, codeProjet: this.codeProjet, montantB: -1}).subscribe(res => {
+        this.collaborateurs.push({codeCollab: this.selectedOption.codeCollab, nom: this.selectedOption.nom, prenom: this.selectedOption.prenom});
+
+        this.collabNotInProjets.forEach((collabNotInProjet: any) => {
+          if(collabNotInProjet.codeCollab == this.selectedOption.codeCollab) {
+            this.collabNotInProjets.pop(collabNotInProjet);
+            this.selectedOption = "Choissisez le collaborateur";
+          }
+        });
+
+      }) 
+    }
+
 
 }
