@@ -18,6 +18,10 @@ export class PopUpBesoinComponent implements OnInit{
   }
   
   ngOnInit() {
+    this.getBesoinsByProjet(this.codeProjet);
+  }
+
+  getBesoinsByProjet(codeProjet: any) {
     this.messageService.sendGet("besoin/byProjet/"+this.codeProjet).subscribe(res => {
       this.Besoins = res.data;
       console.log(this.Besoins);
@@ -28,11 +32,14 @@ export class PopUpBesoinComponent implements OnInit{
     this.messageService.sendPut("besoin/validate/"+selectedBesoin.codeBesoin, {}).subscribe(res => {
       console.log(res)
 
+      this.getBesoinsByProjet(this.codeProjet);
+      /*
       this.Besoins.forEach((besoin: any) => {
-        if(besoin.codeProjet == selectedBesoin.codeProjet) {
-          besoin.valideP = true;
+        if(besoin.codeBesoin == selectedBesoin.codeBesoin) {
+          besoin.valideB = true;
         }
       });
+      */
     })
   }
 
