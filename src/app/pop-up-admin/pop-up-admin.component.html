@@ -1,0 +1,26 @@
+<table class="table table-bordered" >
+    <thead>
+      <tr>
+        <th scope="col">#codeCollab</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Prénom</th>
+        <th scope="col">Dotation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let collaborateur of Collaborateurs">
+        <th scope="row">{{collaborateur.codeCollab}}</th>
+        <td>{{collaborateur.nom}}</td>
+        <td>{{collaborateur.prenom}}</td>
+        <td>{{collaborateur.dotationB}}</td>
+      </tr>
+      <tr class="table-color-add">
+        <th scope="row">#</th>
+        <td><input type="text" class="form-control" ></td>
+        <td><input type="text" class="form-control"></td>
+        <td><input type="text" class="form-control" disabled class="disabled-input"></td>
+        <td><button type="button" class="btn btn-primary" disabled>voir</button></td>
+      </tr>
+    </tbody>
+  </table>
+
