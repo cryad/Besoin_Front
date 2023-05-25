@@ -18,12 +18,31 @@ export class MessageService {
 
   constructor(private http: HttpClient) { }
 
-  sendMessage(url: string, data: any): Observable<Model> {
+  sendPost(url: string, data: any): Observable<Model> {
     let avt_url = hostUrl + url;
     
     const options = {
-      withCredentials: true  // Inclure les informations d'identification
-      // Autres options de la requête, telles que les en-têtes (headers)
+      withCredentials: true 
+    };
+
+    return this.http.post<any>(avt_url, data, options)
+  }
+
+  sendGet(url: string): Observable<Model> {
+    let avt_url = hostUrl + url;
+    
+    const options = {
+      withCredentials: true 
+    };
+
+    return this.http.get<any>(avt_url)
+  }
+
+  sendPut(url: string, data: any): Observable<Model> {
+    let avt_url = hostUrl + url;
+    
+    const options = {
+      withCredentials: true 
     };
 
     return this.http.post<any>(avt_url, data, options)

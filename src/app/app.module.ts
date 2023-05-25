@@ -10,6 +10,8 @@ import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ProfilComponent } from './profil/profil.component';
 import { ComptesComponent } from './comptes/comptes.component';
+import { AdminComponent } from './admin/admin.component';
+
 
 @NgModule({
   declarations: [
@@ -19,13 +21,13 @@ import { ComptesComponent } from './comptes/comptes.component';
     NavbarComponent,
     ProfilComponent,
     ComptesComponent
+    AdminComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
-
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
