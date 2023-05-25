@@ -15,7 +15,6 @@ export class LoginComponent implements OnInit {
   password: string = "";
   errorMessage: string = "";
   invalidLogin = false;
-  typeCompte: any = "";
 
 
 
@@ -27,11 +26,10 @@ export class LoginComponent implements OnInit {
   }
 
   handleLogin() {
-    this.messageService.sendMessage("login", {username: this.username, password: this.password}).subscribe(res => {
+    this.messageService.sendPost("login", {username: this.username, password: this.password}).subscribe(res => {
       console.log(res)
       if(res.status == "OK") {
         this.http.get(hostUrl+"type/"+res.data.codeCollab).subscribe(type => {
-          this.typeCompte = type;
           this.auth.finalizeAuthentication(res.status, res.data, type)
           this.invalidLogin = false;
           this.router.navigateByUrl("/home")
