@@ -29,6 +29,7 @@ export class PopUpAdminComponent implements OnInit{
           this.collabNotInProjets = res.data;
         })
     }
+    
 
     addCollab() {
       this.messageService.sendPost("besoin/assign", {codeCollab: this.selectedOption.codeCollab, codeProjet: this.codeProjet, montantB: -1}).subscribe(res => {

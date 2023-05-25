@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
 
   handleLogin() {
     this.messageService.sendPost("login", {username: this.username, password: this.password}).subscribe(res => {
-      console.log(res)
+      //console.log(res)
       if(res.status == "OK") {
         this.http.get(hostUrl+"type/"+res.data.codeCollab).subscribe(type => {
           this.auth.finalizeAuthentication(res.status, res.data, type)

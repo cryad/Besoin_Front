@@ -45,7 +45,7 @@ export class MessageService {
       withCredentials: true 
     };
 
-    return this.http.post<any>(avt_url, data, options)
+    return this.http.put<any>(avt_url, data, options)
   }
 
 }

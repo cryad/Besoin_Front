@@ -14,6 +14,8 @@ import { ComptesComponent } from './comptes/comptes.component';
 import { AdminComponent } from './admin/admin.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PopUpAdminComponent } from './pop-up-admin/pop-up-admin.component';
+import { FinancierComponent } from './financier/financier.component';
+import { PopUpBesoinComponent } from './pop-up-besoin/pop-up-besoin.component';
 
 
 @NgModule({
@@ -26,6 +28,8 @@ import { PopUpAdminComponent } from './pop-up-admin/pop-up-admin.component';
     ComptesComponent,
     AdminComponent,
     PopUpAdminComponent,
+    FinancierComponent,
+    PopUpBesoinComponent,
   ],
   imports: [
     BrowserModule,
