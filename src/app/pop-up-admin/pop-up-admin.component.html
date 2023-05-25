@@ -8,7 +8,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let collaborateur of Collaborateurs">
+      <tr *ngFor="let collaborateur of collaborateurs">
         <th scope="row">{{collaborateur.codeCollab}}</th>
         <td>{{collaborateur.nom}}</td>
         <td>{{collaborateur.prenom}}</td>
@@ -16,11 +16,23 @@
       </tr>
       <tr class="table-color-add">
         <th scope="row">#</th>
-        <td><input type="text" class="form-control" ></td>
-        <td><input type="text" class="form-control"></td>
-        <td><input type="text" class="form-control" disabled class="disabled-input"></td>
-        <td><button type="button" class="btn btn-primary" disabled>voir</button></td>
+        
+        <td colspan="2" > 
+          <div class="row">
+            <select class="form-select custom-select col" aria-label="Default select example" [(ngModel)]="selectedOption">
+              <option selected selected>Choissisez le collaborateur</option>
+              <option *ngFor="let collabNotInProjet of collabNotInProjets" [ngValue]="{codeCollab: collabNotInProjet.codeCollab, nom: collabNotInProjet.nom, prenom: collabNotInProjet.prenom}">
+                {{collabNotInProjet.prenom}}  {{collabNotInProjet.nom}}
+              </option>
+            </select>
+            <button type="button" class="btn btn-success col custom-add" (click)="addCollab()">+</button>
+          </div>
+        </td>
+
+        <td> <select disabled class="form-control disabled-input" aria-label="Default select example"> </select> </td>
       </tr>
     </tbody>
   </table>
+
+
 

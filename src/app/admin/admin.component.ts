@@ -16,8 +16,8 @@ export class AdminComponent implements OnInit{
 
   projets?: any;
 
-  intituleProjet = "Intitule";
-  budgetProjet = 0;
+  intituleProjet?: string;
+  budgetProjet?: number;
 
   closeResult?: string;
 
@@ -43,7 +43,7 @@ export class AdminComponent implements OnInit{
       this.messageService.sendPost("projet/add", {intituleProjet: this.intituleProjet, budgetProjet: this.budgetProjet}).subscribe(res => {
         this.projets.push(res.data);
         this.intituleProjet = "";
-        this.budgetProjet = 0;
+        this.budgetProjet = undefined;
       })
     }
 

@@ -16,3 +16,21 @@ input {
 .disabled-input {
     background-color: #989898;
 }
+
+select {
+    width: 150px;
+    height: 35px;
+}
+
+.custom-select {
+    width: 350px;
+    margin-left: 10px;
+    margin-right: 5px;
+}
+
+.custom-add {
+    width: 5px;
+    height: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
+}

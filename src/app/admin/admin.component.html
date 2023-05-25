@@ -6,7 +6,7 @@
         <th scope="col">Intitulé</th>
         <th scope="col">Budget</th>
         <th scope="col">Statut</th>
-        <th scope="col">Modification</th>
+        <th scope="col">Voir/Assigner</th>
       </tr>
     </thead>
     <tbody>
@@ -15,14 +15,14 @@
         <td>{{projet.intituleProjet}}</td>
         <td>{{projet.budgetProjet}}</td>
         <td>{{projet.valideP}}</td>
-        <td><button type="button" class="btn btn-primary" (click)="openDialog(projet.codeProjet)">voir</button></td>
+        <td><button type="button" class="btn btn-primary" (click)="openDialog(projet.codeProjet)">Gestion</button></td>
       </tr>
       <tr class="table-color-add">
         <th scope="row">#</th>
-        <td><input type="text" class="form-control" [(ngModel)]="intituleProjet"></td>
-        <td><input type="text" class="form-control" [(ngModel)]="budgetProjet"></td>
+        <td><input type="text" class="form-control" placeholder="Intitulé" [(ngModel)]="intituleProjet"></td>
+        <td><input type="text" class="form-control" placeholder="Budget" [(ngModel)]="budgetProjet"></td>
         <td><input type="text" class="form-control" disabled class="disabled-input"></td>
-        <td><button type="button" class="btn btn-primary" disabled>voir</button></td>
+        <td><button type="button" class="btn btn-primary" disabled>Gestion</button></td>
       </tr>
     </tbody>
   </table>
