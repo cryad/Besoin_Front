@@ -20,7 +20,7 @@ import { AdminComponent } from './admin/admin.component';
     HomeComponent,
     NavbarComponent,
     ProfilComponent,
-    ComptesComponent
+    ComptesComponent,
     AdminComponent
   ],
   imports: [
