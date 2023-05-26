@@ -29,10 +29,16 @@
           </div>
         </td>
 
-        <td> <select disabled class="form-control disabled-input" aria-label="Default select example"> </select> </td>
+        <td> 
+          <div class="form-outline" style="width: 22rem;">
+            <input min="1" max="{{calculerBudgetRestant()}}" type="number" id="typeNumber" class="form-control" [(ngModel)]="dotation" placeholder="{{calculerBudgetRestant()}}"/>
+          </div>
+        </td>
       </tr>
     </tbody>
 </table>
+
+<button  [disabled]="isAddActive()" type="button" class="btn btn-success col custom-add" (click)="addCollab()">+</button>
 
 
 

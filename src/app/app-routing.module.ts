@@ -6,6 +6,7 @@ import { ComptesComponent } from './comptes/comptes.component';
 import { AdminComponent } from './admin/admin.component';
 import { FinancierComponent } from './financier/financier.component';
 import { CollabComponent } from './collab/collab.component';
+import { DotationComponent } from './dotation/dotation.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: "admin", component: AdminComponent},
   {path: "financier", component: FinancierComponent},
   {path: "collab", component: CollabComponent},
+  {path: "dotation", component: DotationComponent}
 ];
 
 @NgModule({
