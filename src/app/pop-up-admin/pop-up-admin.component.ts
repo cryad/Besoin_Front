@@ -15,6 +15,7 @@ export class PopUpAdminComponent implements OnInit{
     selectedOption: any;
     isValide: any;
 
+
     dotation: number;
 
 
@@ -22,6 +23,7 @@ export class PopUpAdminComponent implements OnInit{
       this.isValide = data.isValide;
       this.projet = data;
       this.dotation = 0;
+      this.isValide = data.isValide;
     }
 
     ngOnInit() {
