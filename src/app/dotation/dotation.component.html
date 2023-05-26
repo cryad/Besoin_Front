@@ -1,0 +1,40 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/@dicebear/avatars@5.2.0/dist/avatars.min.js"></script>
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-8 col-lg-6">
+
+          <!-- Section Heading-->
+          <div class="section_heading text-center wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+            <h1> Bienvenue Admin</h1>
+            <h3>Consultez, Révaluer les Dotations de vos Collaborateurs</h3>
+            <div class="line"></div>
+          </div>
+        </div>
+    </div>
+        <div class="row">
+
+          <!-- Single Advisor-->
+          <div class="col-12 col-sm-6 col-lg-3" *ngFor="let collab of Collaborateurs">
+            <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+              <!-- Team Thumb-->
+              <div class="advisor_thumb"><img src="{{getDiceBearAvatar(collab.prenom + ' ' + collab.nom)}}" alt="">
+                <!-- Social Info-->
+                <div class="info"><i style="font-size:24px" class="fa">&#xf0d6;</i> <h5>{{collab.dotation}}</h5></div>
+              </div>
+              <!-- Team Details-->
+              <div class="single_advisor_details_info">
+                <h3>{{collab.prenom}} {{collab.nom}}</h3>
+                <div class="form-outline" style="width: auto;">
+                    <p style="text-align: center;">Révaluer la dotation</p>
+                    <input min="1" type="number" id="typeNumber" class="form-control" [(ngModel)]="dotation"/>
+                    <button type="button" class="btn btn-dark" (click)="updateDotation(collab, dotation)">Dark</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
