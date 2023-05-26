@@ -13,12 +13,12 @@ export class PopUpAdminComponent implements OnInit{
     collaborateurs: any;
     collabNotInProjets: any[] = [];
     selectedOption: any;
-
-    addStatus = true;
+    isValide: any;
 
 
     constructor(@Inject(MAT_DIALOG_DATA) public data: any, private messageService: MessageService) {
       this.codeProjet = data.codeProjet;
+      this.isValide = data.isValide;
     }
 
     ngOnInit() {
@@ -37,6 +37,7 @@ export class PopUpAdminComponent implements OnInit{
       this.messageService.sendPost("besoin/assign", {codeCollab: this.selectedOption.codeCollab, codeProjet: this.codeProjet, montantB: -1}).subscribe(res => {
         this.collaborateurs.push({codeCollab: this.selectedOption.codeCollab, nom: this.selectedOption.nom, prenom: this.selectedOption.prenom});
 
+        this.selectedOption = "";
         this.collabNotInProjets = this.collabNotInProjets.filter((collabNotInProjet: any) => collabNotInProjet.codeCollab !== this.selectedOption.codeCollab);
 
 

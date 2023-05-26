@@ -15,13 +15,11 @@ import { PopUpAdminComponent } from '../pop-up-admin/pop-up-admin.component';
 export class AdminComponent implements OnInit{
 
   projets?: any;
-
   intituleProjet = ""
   budgetProjet?: number;
-
   closeResult?: string;
-
   messageErreur = ""
+
   
 
 
@@ -61,10 +59,11 @@ export class AdminComponent implements OnInit{
       })
     }
 
-    openDialog(codeP: string) {
+    openDialog(codeP: string, isValide: boolean) {
       this.dialogRef.open(PopUpAdminComponent, {
         data: {
-          codeProjet: codeP
+          codeProjet: codeP,
+          isValide: isValide
         }
       })
     }
