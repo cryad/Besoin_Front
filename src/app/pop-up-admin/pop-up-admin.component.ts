@@ -13,6 +13,7 @@ export class PopUpAdminComponent implements OnInit{
     collaborateurs: any;
     collabNotInProjets: any[] = [];
     selectedOption: any;
+    isValide: boolean = false;
 
     addStatus = true;
 
@@ -22,6 +23,7 @@ export class PopUpAdminComponent implements OnInit{
     constructor(@Inject(MAT_DIALOG_DATA) public data: any, private messageService: MessageService) {
       this.projet = data;
       this.dotation = 0;
+      this.isValide = data.isValide;
     }
 
     ngOnInit() {
