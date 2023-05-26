@@ -61,11 +61,9 @@ export class AdminComponent implements OnInit{
       })
     }
 
-    openDialog(codeP: string) {
+    openDialog(projet: string) {
       this.dialogRef.open(PopUpAdminComponent, {
-        data: {
-          codeProjet: codeP
-        }
+        data: projet
       })
     }
   }
