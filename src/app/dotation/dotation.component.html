@@ -13,6 +13,7 @@
             <div class="line"></div>
           </div>
         </div>
+
     </div>
         <div class="row">
 
@@ -21,16 +22,16 @@
             <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
               <!-- Team Thumb-->
               <div class="advisor_thumb"><img src="{{getDiceBearAvatar(collab.prenom + ' ' + collab.nom)}}" alt="">
-                <!-- Social Info-->
-                <div class="info"><i style="font-size:24px" class="fa">&#xf0d6;</i> <h5>{{collab.dotation}}</h5></div>
+                <!-- Info-->
+                <div class="info"> <h3>{{collab.dotation}} <i style="font-size:24px" class="fa">&#xf155;</i></h3></div>
               </div>
               <!-- Team Details-->
               <div class="single_advisor_details_info">
-                <h3>{{collab.prenom}} {{collab.nom}}</h3>
+                <h3 style="text-transform: uppercase;">{{collab.prenom}} {{collab.nom}}</h3>
                 <div class="form-outline" style="width: auto;">
                     <p style="text-align: center;">Révaluer la dotation</p>
-                    <input min="1" type="number" id="typeNumber" class="form-control" [(ngModel)]="dotation"/>
-                    <button type="button" class="btn btn-dark" (click)="updateDotation(collab, dotation)">Dark</button>
+                    <input min="1" type="number" id="typeNumber" class="form-control" [(ngModel)]="collab.dotationTemp"/>
+                    <button type="button" class="btn btn-light" (click)="updateDotation(collab, collab.dotationTemp)" style="margin-top: 10px;">Confirmer</button>
                 </div>
               </div>
             </div>
