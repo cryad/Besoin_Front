@@ -18,6 +18,7 @@ import { FinancierComponent } from './financier/financier.component';
 import { PopUpBesoinComponent } from './pop-up-besoin/pop-up-besoin.component';
 import { CollabComponent } from './collab/collab.component';
 import { DotationComponent } from './dotation/dotation.component';
+import { PopUpCollabComponent } from './pop-up-collab/pop-up-collab.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { DotationComponent } from './dotation/dotation.component';
     PopUpBesoinComponent,
     CollabComponent,
     DotationComponent,
+    PopUpCollabComponent,
   ],
   imports: [
     BrowserModule,

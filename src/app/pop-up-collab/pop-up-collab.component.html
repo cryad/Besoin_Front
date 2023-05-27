@@ -1,0 +1,102 @@
+<div>
+    <div id="carouselExample" class="carousel slide marge">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button *ngFor="let besoin of besoins; let i=index" type="button" data-bs-target="#carouselExampleIndicators" [attr.data-bs-slide-to]="i+1" aria-label="Slide"></button>
+          </div>
+        <div class="carousel-inner">
+
+            <div class="carousel-item active">
+
+                <div *ngIf="!valideP">
+                <h3 style="text-transform: uppercase;" class="title">Ajoutez un besoin</h3>
+                <table class="table table-bordered">
+                 
+                    <tbody>
+                        <tr>
+                            <td><p style="text-align: center;">Ajouter une description</p> <input class="form-control" [(ngModel)]="addDescriptionB" [disabled]="valideP" placeholder="Description"/></td>
+                            <td><p style="text-align: center;">Ajouter un montant</p><input min="1" type="number" id="typeNumber" class="form-control" [(ngModel)]="addMontantB" [disabled]="valideP" placeholder="Montant"/></td>
+                            <td><button type="button" class="btn btn-success" (click)="addBesoin()" [disabled]="valideP">+</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                    <div class="alert alert-danger" *ngIf="addErrorMessage != ''" role="alert">
+                        {{addErrorMessage}}
+                    </div>
+                    <div class="alert alert-success" *ngIf="addSuccessMessage != ''" role="alert">
+                        {{addSuccessMessage}}
+                    </div>
+                </div>
+
+                <div *ngIf="valideP">
+                    <div class="alert alert-success title" role="alert">
+                        <h1>Le projet a été validé</h1>
+                    </div>
+                    <h3> Vous pouvez consultez l'historique de vos besoins</h3>
+                </div>
+
+
+            </div>
+
+            <div>
+                <div class="carousel-item" *ngFor="let besoin of besoins">
+
+                    <h3 style="text-transform: uppercase;" class="title" *ngIf="!valideP">Modifier votre besoin n°{{besoin.codeBesoin}}</h3>
+                    <h3 style="text-transform: uppercase;" class="title" *ngIf="valideP">besoin n°{{besoin.codeBesoin}}</h3>
+
+                    <div class="table-custom">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Montant</th>
+                                    <th scope="col">Statut</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input class="form-control" [(ngModel)]="besoin.descriptionB" [value]="besoin.descriptionB"  [disabled]="valideP || besoin.valideB"/></td>
+                                    <td><input class="form-control" [(ngModel)]="besoin.montantB" [value]="besoin.montantB"  [disabled]="valideP || besoin.valideB"/></td>
+                                
+                                    <td>
+                                        <div class="alert alert-success" *ngIf="besoin.valideB" role="alert">
+                                            Validé par le responsable financier
+                                        </div>
+                                        <div class="alert alert-warning" *ngIf="!besoin.valideB && !valideP" role="alert">
+                                            En attente de validation
+                                        </div>
+                                        <div class="alert alert-danger" *ngIf="!besoin.valideB && valideP" role="alert">
+                                            Refusé
+                                        </div>
+                                    </td>
+                                    <td><button type="button" class="btn btn-primary"
+                                        (click)="updateBesoin(besoin.codeBesoin, besoin.descriptionB, besoin.montantB)" [disabled]="valideP || besoin.valideB">OK</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="alert alert-danger" *ngIf="modifyErrorMessage != ''" role="alert">
+                            {{modifyErrorMessage}}
+                        </div>
+                        <div class="alert alert-success" *ngIf="modifySuccessMessage != ''" role="alert">
+                            {{modifySuccessMessage}}
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+        <div class="center-arrow">
+            <button class="btn btn-primary left" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Précédent</span>
+            </button>
+            <button class="btn btn-primary right" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Suivant</span>
+            </button>
+        </div>
+    </div>
+</div>
