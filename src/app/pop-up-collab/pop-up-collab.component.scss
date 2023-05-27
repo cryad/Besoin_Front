@@ -1,0 +1,38 @@
+.carousel-control-next,
+.carousel-control-prev
+
+/*, .carousel-indicators */
+    {
+    filter: invert(100%);
+}
+
+.marge {
+    margin-left: 80px;
+    margin-right: 80px;
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+.center-arrow {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-indicators {
+    position: absolute; 
+    bottom: 0; 
+    margin-bottom: -30px;
+    filter: invert(100%);
+}
+
+.left {
+    margin-right: 20px;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+}

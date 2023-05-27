@@ -1,37 +1,53 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/@dicebear/avatars@5.2.0/dist/avatars.min.js"></script>
+
+
 <div class="container">
-    <div class="table-custom center-table">
-        <table class="table table-bordered" >
-            <thead>
-            <tr>
-                <th scope="col">#codeProjet</th>
-                <th scope="col">Intitulé</th>
-                <th scope="col">Budget</th>
-                <th scope="col">Statut</th>
-                <th scope="col">Besoins</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let projet of projets">
-                <th scope="row">{{projet.codeProjet}}</th>
-                <td>{{projet.intituleProjet}}</td>
-                <td>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                        <span class="input-group-text">{{projet.budgetProjet}} $</span>
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-8 col-lg-6">
+
+            <!-- Section Heading-->
+            <div class="section_heading text-center wow fadeInUp" data-wow-delay="0.2s"
+                style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                <h1> Bienvenue {{prenom}}</h1>
+                <h3 style="text-transform: uppercase;" *ngIf="projets.length > 0">Consultez les projets et gérez les besoins</h3>
+                <h3 *ngIf="projets.length == 0">Oups, vous n'avez aucun projet</h3>
+                <div class="line"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+        <!-- Single Advisor-->
+        <div class="col-12 col-sm-6 col-lg-3" *ngFor="let projet of projets">
+            <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.3s"
+                style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+                <!-- Team Thumb-->
+                <div class="advisor_thumb"><img class="projetImage"
+                        src="{{getDiceBearAvatar(projet.intituleProjet + ' ' + projet.budgetProjet)}}" alt="">
+                    <!-- Social Info-->
+                    <div class="info" style="text-transform: uppercase;">
+                        <h4>{{projet.intituleProjet}}</h4>
+                    </div>
+                </div>
+                <!-- Team Details-->
+                <div class="single_advisor_details_info">
+                    <div class="form-outline" style="width: auto;">
+                        <div class="row">
+                        <button type="button" class="btn btn-secondary" (click)="openDialog(projet.codeProjet, projet.valideP)">Voir vos besoins</button>
+                            <span class="badge rounded-pill text-bg-success isValide" *ngIf="projet.valideP">Validé</span>
+                            <!-- <div class="alert alert-success isValide" role="alert" *ngIf="projet.valideP">Validé</div> -->
+                            <span class="badge rounded-pill text-bg-warning isValide" *ngIf="!projet.valideP">Non validé</span>
+                            <!-- <div class="alert alert-secondary isValide" role="alert" *ngIf="!projet.valideP">Non validé</div> -->
                         </div>
                     </div>
-                </td>
-                <td>
-                    <button type="button" class="btn btn-outline-danger btn-rounded" *ngIf="!projet.valideP" data-mdb-ripple-color="dark">Clique pour valider</button>
-                    <div class="alert alert-success" *ngIf="projet.valideP" role="alert">
-                        Ce projet est validé
-                    </div>
-                </td>
-                <td><button type="button" class="btn btn-primary">Voir</button></td>
-            </tr>
-            </tbody>
-        </table>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 
-<!-- test -->
+<div *ngIf="projets.length == 0">
+    <img class="center-image" src="../../assets/images/noProjet.png">
+</div>
