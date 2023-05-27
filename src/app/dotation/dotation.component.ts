@@ -14,13 +14,19 @@ export class DotationComponent implements OnInit{
 
   Collaborateurs: any;
   collaborateur: any;
-  dotation: number;
 
   constructor(private auth: AuthServiceModule, private router: Router, private messageService: MessageService,) {
-    this.dotation = 0;
   }
 
   ngOnInit(): void {
+    if(!this.auth.isAuthenticated()) {
+      this.router.navigateByUrl("/login")
+    }
+
+    if(this.auth.getType() != "admin") {
+      this.router.navigateByUrl("/home")
+    }
+
     this.getAllCollab();
   }
   
@@ -32,12 +38,15 @@ export class DotationComponent implements OnInit{
 
   //updateDotation
   updateDotation(col: any, dot: number) {
-    this.messageService.sendPut("collab/updateDotation", {codeCollab: col.codeCollab, dotation: dot}).subscribe(res => {
-      console.log("voila ce que ça renvoie "+res.data);
-      this.Collaborateurs = res.data;
+    this.messageService.sendPut("collab/updateDotation/"+col.codeCollab, {dotation: dot}).subscribe(res => {
+      //update local
+      this.Collaborateurs.forEach((element: any) => {
+        if(element.codeCollab == col.codeCollab) {
+          element.dotation = dot;
+        }
+      });
     })
   }
-
 
 
   getDiceBearAvatar(seed: string): string {

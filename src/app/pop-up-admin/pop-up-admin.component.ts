@@ -12,7 +12,10 @@ export class PopUpAdminComponent implements OnInit{
     projet: any;
     collaborateurs: any;
     collabNotInProjets: any[] = [];
+    adminNotInProjets: any[] = [];
+    respoFinancierNotInProjets: any[] = [];
     selectedOption: any;
+    selectedRole: any;
     isValide: any;
 
 
@@ -36,15 +39,26 @@ export class PopUpAdminComponent implements OnInit{
           console.log(res.data)
           this.collabNotInProjets = res.data;
         })
+
+        this.messageService.sendGet("admin/notIn/"+this.projet.codeProjet).subscribe(res => {
+          this.adminNotInProjets = res.data;
+        })
+
+        this.messageService.sendGet("respoFinancier/notIn/"+this.projet.codeProjet).subscribe(res => {
+          this.respoFinancierNotInProjets = res.data;
+        })
+
     }
 
     addCollab() {
       this.messageService.sendPost("besoin/assign", {codeCollab: this.selectedOption.codeCollab, codeProjet: this.projet.codeProjet, montantB: -1}).subscribe(res => {
         this.collaborateurs.push({codeCollab: this.selectedOption.codeCollab, nom: this.selectedOption.nom, prenom: this.selectedOption.prenom});
 
-        this.selectedOption = "";
         this.collabNotInProjets = this.collabNotInProjets.filter((collabNotInProjet: any) => collabNotInProjet.codeCollab !== this.selectedOption.codeCollab);
+        this.adminNotInProjets = this.adminNotInProjets.filter((adminNotInProjet: any) => adminNotInProjet.codeCollab !== this.selectedOption.codeCollab);
+        this.respoFinancierNotInProjets = this.respoFinancierNotInProjets.filter((respoFinancierNotInProjet: any) => respoFinancierNotInProjet.codeCollab !== this.selectedOption.codeCollab);
 
+        this.selectedOption = "";
 
       }) 
     }
@@ -56,18 +70,6 @@ export class PopUpAdminComponent implements OnInit{
       return false;
     }
 
-    // calculer le budget restant qui est budget du projet - la somme des dotations des collaborateurs
-    calculerBudgetRestant(): number {
-      let budgetRestant = this.projet.budgetProjet;
-      this.collaborateurs.forEach((collab: any) => {
-        budgetRestant -= collab.dotation;
-      })
-
-      console.log("le projet : ", this.projet.codeProjet, " qui a le budget : ", this.projet.budgetProjet, " a le budget restant : ", budgetRestant);
-
-
-      return budgetRestant;
-    }
 
 
 }
