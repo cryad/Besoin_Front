@@ -1,44 +1,78 @@
-<table class="table table-bordered" >
-    <thead>
-      <tr>
-        <th scope="col">#codeCollab</th>
-        <th scope="col">Nom</th>
-        <th scope="col">Prénom</th>
-        <th scope="col">Dotation</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let collaborateur of collaborateurs">
-        <th scope="row">{{collaborateur.codeCollab}}</th>
-        <td>{{collaborateur.nom}}</td>
-        <td>{{collaborateur.prenom}}</td>
-        <td>{{collaborateur.dotation}}</td>
-      </tr>
-      <tr class="table-color-add">
-        <th scope="row">#</th>
-        
-        <td colspan="2" > 
-          <div class="row">
-            <select [disabled]="isAddActive() || isValide" class="form-select custom-select col" aria-label="Default select example" [(ngModel)]="selectedOption">
-              <option selected selected>Choissisez le collaborateur</option>
-              <option *ngFor="let collabNotInProjet of collabNotInProjets" [ngValue]="{codeCollab: collabNotInProjet.codeCollab, nom: collabNotInProjet.nom, prenom: collabNotInProjet.prenom}">
-                {{collabNotInProjet.codeCollab}} {{collabNotInProjet.prenom}}  {{collabNotInProjet.nom}}
-              </option>
-            </select>
-            <button  [disabled]="isAddActive() || isValide" type="button" class="btn btn-success col custom-add" (click)="addCollab()">+</button>
-          </div>
-        </td>
+<div class="popup-container">
+  <div class="popup-content">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">#codeCollab</th>
+          <th scope="col">Nom</th>
+          <th scope="col">Prénom</th>
+          <th scope="col">Dotation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let collaborateur of collaborateurs">
+          <th scope="row">{{collaborateur.codeCollab}}</th>
+          <td>{{collaborateur.nom}}</td>
+          <td>{{collaborateur.prenom}}</td>
+          <td>{{collaborateur.dotation}}</td>
+        </tr>
+        <tr class="table-color-add">
+          <td colspan="4">
+            <h3>Choisissez le Role</h3>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="collab" [(ngModel)]="selectedRole">
+              <label class="form-check-label" for="exampleRadios2" style="color: rgb(13, 124, 204);">
+                Collaborateur
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="respoFinancier" [(ngModel)]="selectedRole">
+              <label class="form-check-label" for="exampleRadios2" style="color: rgb(48, 131, 81);">
+                Responsable Financier
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="admin" checked [(ngModel)]="selectedRole">
+              <label class="form-check-label" for="exampleRadios1" style="color: #601a1a;">
+                Administateur
+              </label>
+            </div>
+          </td>
+        </tr>
+        <tr class="table-color-add">
+          <td colspan="4">
+            <div class="row">
+              <select [disabled]="isAddActive() || isValide" class="form-select custom-select col" aria-label="Default select example" [(ngModel)]="selectedOption">
+                
+                <ng-container *ngIf="selectedRole === 'admin'">
+                  <option selected selected>Choisissez l'administrateur</option>
+                  <option *ngFor="let adminNotInProjet of adminNotInProjets" [ngValue]="{codeCollab: adminNotInProjet.codeCollab, nom: adminNotInProjet.nom, prenom: adminNotInProjet.prenom}">
+                    {{adminNotInProjet.codeCollab}} {{adminNotInProjet.prenom}} {{adminNotInProjet.nom}}
+                  </option>
+                </ng-container>
 
-        <td> 
-          <div class="form-outline" style="width: 22rem;">
-            <input min="1" max="{{calculerBudgetRestant()}}" type="number" id="typeNumber" class="form-control" [(ngModel)]="dotation" placeholder="{{calculerBudgetRestant()}}"/>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-</table>
+                <ng-container *ngIf="selectedRole === 'respoFinancier'">
+                  <option selected selected>Choisissez le Responsable Financier</option>
+                  <option *ngFor="let respoFinancierNotInProjet of respoFinancierNotInProjets" [ngValue]="{codeCollab: respoFinancierNotInProjet.codeCollab, nom: respoFinancierNotInProjet.nom, prenom: respoFinancierNotInProjet.prenom}">
+                    {{respoFinancierNotInProjet.codeCollab}} {{respoFinancierNotInProjet.prenom}} {{respoFinancierNotInProjet.nom}}
+                  </option>
+                </ng-container>
 
-<button  [disabled]="isAddActive()" type="button" class="btn btn-success col custom-add" (click)="addCollab()">+</button>
+                <ng-container *ngIf="selectedRole === 'collab'">
+                  <option selected selected>Choisissez le collaborateur</option>
+                  <option *ngFor="let collabNotInProjet of collabNotInProjets" [ngValue]="{codeCollab: collabNotInProjet.codeCollab, nom: collabNotInProjet.nom, prenom: collabNotInProjet.prenom}">
+                    {{collabNotInProjet.codeCollab}} {{collabNotInProjet.prenom}} {{collabNotInProjet.nom}}
+                  </option>
+                </ng-container>
 
+              </select>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-
+    <button [disabled]="isAddActive()" type="button" class="btn btn-success col custom-add" (click)="addCollab()">+</button>
+  
+  </div>
+</div>

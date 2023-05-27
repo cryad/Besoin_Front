@@ -7,3 +7,20 @@ a:hover {
   color:rgb(157, 25, 25);
 }
 
+.logo {
+  //mettre tout a gauche
+  margin-left: 0px;
+}
+
+.container{
+  width: 100%;
+  margin-left: 0px;
+  margin-right: 0px;
+  display: flex;
+  overflow: hidden;
+}
+
+.container nav {
+  width: 100%;
+
+}
