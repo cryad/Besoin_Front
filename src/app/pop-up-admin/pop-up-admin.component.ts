@@ -18,6 +18,9 @@ export class PopUpAdminComponent implements OnInit{
     selectedRole: any;
     isValide: any;
 
+    respoFinanciers: any;
+    admins: any;
+
 
     dotation: number;
 
@@ -31,8 +34,18 @@ export class PopUpAdminComponent implements OnInit{
 
     ngOnInit() {
 
+        this.messageService.sendGet("admin/In/"+this.projet.codeProjet).subscribe(res => {
+          this.admins = res.data;
+        })
+
+        this.messageService.sendGet("respoFinancier/In/"+this.projet.codeProjet).subscribe(res => {
+          this.respoFinanciers = res.data;
+        })
+
         this.messageService.sendGet("collab/In/"+this.projet.codeProjet).subscribe(res => {
           this.collaborateurs = res.data;
+          this.collaborateurs = this.collaborateurs.filter((collaborateur: any) => !this.respoFinanciers.some((responsableFinancier: any) => responsableFinancier.codeCollab === collaborateur.codeCollab));
+          this.collaborateurs = this.collaborateurs.filter((collaborateur: any) => !this.admins.some((admin: any) => admin.codeCollab === collaborateur.codeCollab));
         })
 
         this.messageService.sendGet("collab/notIn/"+this.projet.codeProjet).subscribe(res => {
@@ -52,7 +65,7 @@ export class PopUpAdminComponent implements OnInit{
 
     addCollab() {
       this.messageService.sendPost("besoin/assign", {codeCollab: this.selectedOption.codeCollab, codeProjet: this.projet.codeProjet, montantB: -1}).subscribe(res => {
-        this.collaborateurs.push({codeCollab: this.selectedOption.codeCollab, nom: this.selectedOption.nom, prenom: this.selectedOption.prenom});
+        this.collaborateurs.push({codeCollab: this.selectedOption.codeCollab, nom: this.selectedOption.nom, prenom: this.selectedOption.prenom, dotation: this.selectedOption.dotation});
 
         this.collabNotInProjets = this.collabNotInProjets.filter((collabNotInProjet: any) => collabNotInProjet.codeCollab !== this.selectedOption.codeCollab);
         this.adminNotInProjets = this.adminNotInProjets.filter((adminNotInProjet: any) => adminNotInProjet.codeCollab !== this.selectedOption.codeCollab);
