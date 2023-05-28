@@ -10,118 +10,123 @@ import { MessageService } from 'src/message/message.service';
 export class PopUpAdminComponent implements OnInit{
 
     projet: any;
-    collaborateurs: any;
-    collabNotInProjets: any[] = [];
-    adminNotInProjets: any[] = [];
-    adminInProjets: any[] = [];
-    respoFinancierNotInProjets: any[] = [];
-    respoFinancierInProjets: any[] = [];
-    selectedOption: any;
-    selectedRole: any;
     isValide: any;
-
-    respoFinanciers: any;
-    admins: any;
-
-
     dotation: number;
+
+    //Celui qu'on ajoute
+    selectedOption: any;
+
+    //Le rôle
+    selectedRole: any;
+
+    //Récupération backend ceux qui ne sont pas dans le projet
+    adminsNotInProjet: any[] = [];
+    respoFinanciersNotInProjet: any[] = [];
+    collabsNotInProjet: any[] = [];
+    
+    //Récupération backend ceux qui sont dans le projet
+    adminsInProjet: any[] = [];
+    respoFinanciersInProjet: any[] = [];
+    collabsInProjet: any[] = [];
+
 
 
     constructor(@Inject(MAT_DIALOG_DATA) public data: any, private messageService: MessageService) {
+
       this.isValide = data.isValide;
       this.projet = data;
       this.dotation = 0;
-      this.isValide = data.isValide;
+
     }
 
     ngOnInit() {
+      //Pas dans le projet
+      this.getAdminsNotInProjet();
+      this.getRespoFinanciersNotInProjet();
+      this.getCollabsNotInProjet();
 
-
-      this.getAdminNotInProjet(this.projet.codeProjet);
-      this.getAdminInProjet(this.projet.codeProjet);
-      this.getRespoFinancierNotInProjet(this.projet.codeProjet);
-      this.getRespoFinancierInProjet(this.projet.codeProjet);
-      this.getCollaborateursInProjet(this.projet.codeProjet);
-      this.getCollaborateursNotInProjet(this.projet.codeProjet);
-
-
+      //Dans le projet
+      this.getAdminsInProjet();
+      this.getRespoFinanciersInProjet();
+      this.getCollabsInProjet();
     }
 
-
-    //Get admin not in projet
-    getAdminNotInProjet(codeProjet: any) {
+    getAdminsNotInProjet() {
       this.messageService.sendGet("admin/notIn/"+this.projet.codeProjet).subscribe(res => {
-        this.adminNotInProjets = res.data;
+        this.adminsNotInProjet = res.data;
       })
     }
 
-    //get admin in projet
-    getAdminInProjet(codeProjet: any) {
-      this.messageService.sendGet("admin/In/"+this.projet.codeProjet).subscribe(res => {
-        this.adminInProjets = res.data;
-      })
-    }
-
-
-    //Get respo financier not in projet
-    getRespoFinancierNotInProjet(codeProjet: any) {
+    getRespoFinanciersNotInProjet() {
       this.messageService.sendGet("respoFinancier/notIn/"+this.projet.codeProjet).subscribe(res => {
-        this.respoFinancierNotInProjets = res.data;
+        this.respoFinanciersNotInProjet = res.data;
       })
     }
 
-    //Get respo financier in projet
-
-    getRespoFinancierInProjet(codeProjet: any) {
-      this.messageService.sendGet("respoFinancier/In/"+this.projet.codeProjet).subscribe(res => {
-        this.respoFinancierInProjets = res.data;
-      })
-    }
-
-    //Get collaborateurs in projet
-    getCollaborateursInProjet(codeProjet: any) {
-      this.messageService.sendGet("collab/In/"+this.projet.codeProjet).subscribe(res => {
-        this.collaborateurs = res.data;
-        this.collaborateurs = this.collaborateurs.filter((collaborateur: any) => !this.respoFinancierInProjets.some((responsableFinancier: any) => responsableFinancier.codeCollab === collaborateur.codeCollab));
-        this.collaborateurs = this.collaborateurs.filter((collaborateur: any) => !this.adminInProjets.some((admin: any) => admin.codeCollab === collaborateur.codeCollab));
-      })
-    }
-
-
-
-    //Get collaborateurs not in projet
-    getCollaborateursNotInProjet(codeProjet: any) {
+    getCollabsNotInProjet() {
       this.messageService.sendGet("collab/notIn/"+this.projet.codeProjet).subscribe(res => {
-        this.collabNotInProjets = res.data;
-        this.collabNotInProjets = this.collabNotInProjets.filter((collaborateur: any) => !this.respoFinancierInProjets.some((responsableFinancier: any) => responsableFinancier.codeCollab === collaborateur.codeCollab));
-        this.collabNotInProjets = this.collabNotInProjets.filter((collaborateur: any) => !this.adminInProjets.some((admin: any) => admin.codeCollab === collaborateur.codeCollab));
+        this.collabsNotInProjet = res.data;
       })
-
-      
-    
     }
+
+    getAdminsInProjet() {
+      this.messageService.sendGet("admin/In/"+this.projet.codeProjet).subscribe(res => {
+        this.adminsInProjet = res.data
+      })
+    }
+
+    getRespoFinanciersInProjet() {
+      this.messageService.sendGet("respoFinancier/In/"+this.projet.codeProjet).subscribe(res => {
+        this.respoFinanciersInProjet = res.data
+      })
+    }
+
+    getCollabsInProjet() {
+      this.messageService.sendGet("collab/In/"+this.projet.codeProjet).subscribe(res => {
+        this.collabsInProjet = res.data
+      })
+    }
+
+    
+
 
 
     addCollab() {
       this.messageService.sendPost("besoin/assign", {codeCollab: this.selectedOption.codeCollab, codeProjet: this.projet.codeProjet, montantB: -1}).subscribe(res => {
+        
+        //Boolean qui permet de trouver le type
+        const foundInCollab = this.collabsNotInProjet.find((collab) => collab.codeCollab === this.selectedOption.codeCollab);
+        const foundInAdmin = this.adminsNotInProjet.find((admin) => admin.codeCollab === this.selectedOption.codeCollab);
+        const foundInResponsableFinancier = this.respoFinanciersNotInProjet.find((responsableFinancier) => responsableFinancier.codeCollab === this.selectedOption.codeCollab);
 
-        this.getAdminNotInProjet(this.projet.codeProjet);
-        this.getAdminInProjet(this.projet.codeProjet);
-        this.getRespoFinancierNotInProjet(this.projet.codeProjet);
-        this.getRespoFinancierInProjet(this.projet.codeProjet);
-        this.getCollaborateursNotInProjet(this.projet.codeProjet);
-        this.getCollaborateursInProjet(this.projet.codeProjet);
+        console.log(this.selectedOption)
+        
+        //Action local en fonction du type
+        if(foundInAdmin) {
 
+          this.adminsInProjet.push(this.selectedOption)
+          this.adminsNotInProjet = this.adminsNotInProjet.filter((admin) => admin.codeCollab !== this.selectedOption.codeCollab);
 
-        this.selectedOption = "";
+        } else if(foundInResponsableFinancier) {
 
-      }) 
+          this.respoFinanciersInProjet.push(this.selectedOption)
+          this.respoFinanciersNotInProjet = this.respoFinanciersNotInProjet.filter((respoFinancier) => respoFinancier.codeCollab !== this.selectedOption.codeCollab);
+
+        } else if(foundInCollab) {
+
+          this.collabsInProjet.push(this.selectedOption)
+          this.collabsNotInProjet = this.collabsNotInProjet.filter((collab) => collab.codeCollab !== this.selectedOption.codeCollab);
+
+        }
+
+      })
     }
 
     isAddActive(): boolean {
-      if(this.collabNotInProjets.length === 0) {
-        return true;
-      }
+      // if(this.collabsNotInProjet.length === 0 && this.adminsNotInProjet.length == 0 && this.respoFinanciersNotInProjet.length == 0) {
+      //   return true;
+      // }
+      // return false;
       return false;
     }
 
