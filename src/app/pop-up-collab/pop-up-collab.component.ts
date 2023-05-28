@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MessageService } from 'src/message/message.service';
+import { AuthServiceModule } from '../auth-service/auth-service.module';
 
 @Component({
   selector: 'app-pop-up-collab',
@@ -12,6 +13,7 @@ export class PopUpCollabComponent {
   codeProjet: any;
   codeCollab: number;
   besoins: any;
+  dotation: number;
 
   addDescriptionB?: string;
   addMontantB?: any;
@@ -28,10 +30,11 @@ export class PopUpCollabComponent {
   modifySuccessMessage = "";
 
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private messageService: MessageService) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private messageService: MessageService , private auth: AuthServiceModule) {
     this.codeProjet = data.codeProjet;
     this.codeCollab = data.codeCollab
     this.valideP = data.valideP
+    this.dotation = 0;
   }
 
   ngOnInit() {
@@ -47,13 +50,22 @@ export class PopUpCollabComponent {
 
       this.besoins = this.besoins.filter((besoin: any) => besoin.montantB !== -1);
     })
+
+    this.getDotation();
  
+  }
+
+  getDotation() {
+    this.messageService.sendGet("collab/dotation/"+this.auth.getCodeCollab()).subscribe(res => {
+      this.dotation = res.data;
+    })
   }
 
   addBesoin() {
     if(this.addMontantB == null || this.addDescriptionB == null) {
       this.addErrorMessage = "Vous devez remplir tout les champs"
-    }  else {
+    }  
+    else {
         
         this.messageService.sendPost("besoin/add", {codeCollab: this.codeCollab, codeProjet: this.codeProjet, montantB: this.addMontantB, descriptionB: this.addDescriptionB, isValide: false}).subscribe(res => {
 
@@ -63,6 +75,7 @@ export class PopUpCollabComponent {
           this.addDescriptionB = "";
           this.addErrorMessage = "";
           this.addSuccessMessage = "Besoin ajouté"
+          this.getDotation();
         }
         if(res.status == "ERROR") {
           this.addSuccessMessage = "";

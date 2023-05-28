@@ -65,21 +65,21 @@
                 <ng-container *ngIf="selectedRole === 'admin'">
                   <option selected selected>Choisissez l'administrateur</option>
                   <option *ngFor="let adminNotInProjet of adminNotInProjets" [ngValue]="{codeCollab: adminNotInProjet.codeCollab, nom: adminNotInProjet.nom, prenom: adminNotInProjet.prenom}">
-                    {{adminNotInProjet.codeCollab}} {{adminNotInProjet.prenom}} {{adminNotInProjet.nom}}
+                    {{adminNotInProjet.codeCollab}} : {{adminNotInProjet.prenom}} {{adminNotInProjet.nom}}
                   </option>
                 </ng-container>
 
                 <ng-container *ngIf="selectedRole === 'respoFinancier'">
                   <option selected selected>Choisissez le Responsable Financier</option>
                   <option *ngFor="let respoFinancierNotInProjet of respoFinancierNotInProjets" [ngValue]="{codeCollab: respoFinancierNotInProjet.codeCollab, nom: respoFinancierNotInProjet.nom, prenom: respoFinancierNotInProjet.prenom}">
-                    {{respoFinancierNotInProjet.codeCollab}} {{respoFinancierNotInProjet.prenom}} {{respoFinancierNotInProjet.nom}}
+                    {{respoFinancierNotInProjet.codeCollab}} : {{respoFinancierNotInProjet.prenom}} {{respoFinancierNotInProjet.nom}}
                   </option>
                 </ng-container>
 
                 <ng-container *ngIf="selectedRole === 'collab'">
                   <option selected selected>Choisissez le collaborateur</option>
                   <option *ngFor="let collabNotInProjet of collabNotInProjets" [ngValue]="{codeCollab: collabNotInProjet.codeCollab, nom: collabNotInProjet.nom, prenom: collabNotInProjet.prenom}">
-                    {{collabNotInProjet.codeCollab}} {{collabNotInProjet.prenom}} {{collabNotInProjet.nom}}
+                    {{collabNotInProjet.codeCollab}} : {{collabNotInProjet.prenom}} {{collabNotInProjet.nom}}
                   </option>
                 </ng-container>
 

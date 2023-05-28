@@ -1,3 +1,33 @@
-.selected {
-    background-color: #cce5ff; /* Couleur de fond pour la ligne sélectionnée */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#text-container {
+  width: 400px;
+  height: 60px;
+  border: 1px solid black;
+  padding: 10px;
+  font-family: Arial, sans-serif;
+  font-size: 24px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center; /* Centrer le texte horizontalement */
+}
+
+#text-container::after {
+  content: "|";
+  display: inline-block;
+  animation: cursor-blink 0.7s infinite;
+}
+
+@keyframes cursor-blink {
+  0%, 100% {
+    opacity: 1;
   }
+  50% {
+    opacity: 0;
+  }
+}

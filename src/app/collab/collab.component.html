@@ -10,7 +10,7 @@
             <div class="section_heading text-center wow fadeInUp" data-wow-delay="0.2s"
                 style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
                 <h1> Bienvenue {{prenom}}</h1>
-                <h3 style="text-transform: uppercase;" *ngIf="projets.length > 0">Consultez les projets et gérez les besoins</h3>
+                <h3 *ngIf="projets.length > 0">Consultez les projets et gérez les besoins</h3>
                 <h3 *ngIf="projets.length == 0">Oups, vous n'avez aucun projet</h3>
                 <div class="line"></div>
             </div>
