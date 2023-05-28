@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   displayText: string = '';
   texts: string[] = ["Bienvenue sur Needs Pro", "Désormais, vous pouvez gérer", "vos projets", "vos collaborateurs", "vos besoins", "en toute simplicité !"];
   currentIndex: number = 0;
+  prenom: any;
 
   constructor(private auth: AuthServiceModule, private router: Router) { }
 
@@ -22,6 +23,7 @@ export class HomeComponent implements OnInit {
       if(!this.auth.isAuthenticated()) {
         this.router.navigateByUrl("/login")
       }
+      this.prenom = this.auth.getPrenom();
 
       this.type = this.auth.getType();
       this.startTyping();
