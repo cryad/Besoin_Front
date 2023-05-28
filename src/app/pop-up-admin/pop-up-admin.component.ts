@@ -123,10 +123,9 @@ export class PopUpAdminComponent implements OnInit{
     }
 
     isAddActive(): boolean {
-      // if(this.collabsNotInProjet.length === 0 && this.adminsNotInProjet.length == 0 && this.respoFinanciersNotInProjet.length == 0) {
-      //   return true;
-      // }
-      // return false;
+      if(this.collabsNotInProjet.length === 0 && this.adminsNotInProjet.length == 0 && this.respoFinanciersNotInProjet.length == 0) {
+        return true;
+      }
       return false;
     }
 

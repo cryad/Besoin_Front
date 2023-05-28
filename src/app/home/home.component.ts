@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit {
 
   type: any = "";
   displayText: string = '';
-  texts: string[] = ["Bienvenue sur Needs Pro", "Désormais, vous pouvez gérer", "vos projets", "vos collaborateurs", "vos besoins", "en toute simplicité !"];
+  texts: string[] = []
   currentIndex: number = 0;
   prenom: any;
 
@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
         this.router.navigateByUrl("/login")
       }
       this.prenom = this.auth.getPrenom();
-
+      this.texts = ["Bienvenue "+this.prenom, "Désormais, vous pouvez gérer", "vos projets", "vos collaborateurs", "vos besoins", "en toute simplicité !"];
       this.type = this.auth.getType();
       this.startTyping();
 
