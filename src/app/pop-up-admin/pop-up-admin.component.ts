@@ -20,6 +20,9 @@ export class PopUpAdminComponent implements OnInit{
     selectedRole: any;
     isValide: any;
 
+    respoFinanciers: any;
+    admins: any;
+
 
     dotation: number;
 
@@ -32,6 +35,7 @@ export class PopUpAdminComponent implements OnInit{
     }
 
     ngOnInit() {
+
 
       this.getAdminNotInProjet(this.projet.codeProjet);
       this.getAdminInProjet(this.projet.codeProjet);
@@ -78,7 +82,8 @@ export class PopUpAdminComponent implements OnInit{
     getCollaborateursInProjet(codeProjet: any) {
       this.messageService.sendGet("collab/In/"+this.projet.codeProjet).subscribe(res => {
         this.collaborateurs = res.data;
-
+        this.collaborateurs = this.collaborateurs.filter((collaborateur: any) => !this.respoFinancierInProjets.some((responsableFinancier: any) => responsableFinancier.codeCollab === collaborateur.codeCollab));
+        this.collaborateurs = this.collaborateurs.filter((collaborateur: any) => !this.adminInProjets.some((admin: any) => admin.codeCollab === collaborateur.codeCollab));
       })
     }
 
@@ -88,6 +93,8 @@ export class PopUpAdminComponent implements OnInit{
     getCollaborateursNotInProjet(codeProjet: any) {
       this.messageService.sendGet("collab/notIn/"+this.projet.codeProjet).subscribe(res => {
         this.collabNotInProjets = res.data;
+        this.collabNotInProjets = this.collabNotInProjets.filter((collaborateur: any) => !this.respoFinancierInProjets.some((responsableFinancier: any) => responsableFinancier.codeCollab === collaborateur.codeCollab));
+        this.collabNotInProjets = this.collabNotInProjets.filter((collaborateur: any) => !this.adminInProjets.some((admin: any) => admin.codeCollab === collaborateur.codeCollab));
       })
 
       
@@ -97,12 +104,14 @@ export class PopUpAdminComponent implements OnInit{
 
     addCollab() {
       this.messageService.sendPost("besoin/assign", {codeCollab: this.selectedOption.codeCollab, codeProjet: this.projet.codeProjet, montantB: -1}).subscribe(res => {
+
         this.getAdminNotInProjet(this.projet.codeProjet);
         this.getAdminInProjet(this.projet.codeProjet);
         this.getRespoFinancierNotInProjet(this.projet.codeProjet);
         this.getRespoFinancierInProjet(this.projet.codeProjet);
         this.getCollaborateursNotInProjet(this.projet.codeProjet);
         this.getCollaborateursInProjet(this.projet.codeProjet);
+
 
         this.selectedOption = "";
 

@@ -6,7 +6,8 @@
 
 <div class="table-custom">
 
-<table class="table table-bordered" >
+<table class="table table-bordered rounded-table" >
+
     <thead>
       <tr>
         <th scope="col">#codeProjet</th>
@@ -18,7 +19,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let projet of projets">
-        <th scope="row">{{projet.codeProjet}}</th>
+        <td scope="row">{{projet.codeProjet}}</td>
         <td>{{projet.intituleProjet}}</td>
         <td><span class="input-group-text">{{projet.budgetProjet}} $</span></td>
         <td>
@@ -32,7 +33,7 @@
         <td><button type="button" class="btn btn-primary" (click)="openDialog(projet.codeProjet, projet.valideP)">Gestion</button></td>
       </tr>
       <tr class="table-color-add">
-        <th scope="row">#</th>
+        <td scope="row">#</td>
         <td><input type="text" class="form-control" placeholder="Intitulé" [(ngModel)]="intituleProjet"></td>
         <td><input type="text" class="form-control" placeholder="Budget" [(ngModel)]="budgetProjet"></td>
         <td></td>
