@@ -20,6 +20,8 @@ export class AdminComponent implements OnInit{
   closeResult?: string;
   messageErreur = ""
 
+  prenom: any;
+
   
 
 
@@ -42,6 +44,8 @@ export class AdminComponent implements OnInit{
     this.messageService.sendGet("projet/all").subscribe(res => {
       this.projets = res.data;
     })
+
+    this.prenom = this.auth.getPrenom()
   }
 
   addCollab() {

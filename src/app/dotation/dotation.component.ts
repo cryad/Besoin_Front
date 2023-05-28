@@ -14,6 +14,7 @@ export class DotationComponent implements OnInit{
 
   Collaborateurs: any;
   collaborateur: any;
+  prenom: any;
 
   constructor(private auth: AuthServiceModule, private router: Router, private messageService: MessageService,) {
   }
@@ -26,6 +27,8 @@ export class DotationComponent implements OnInit{
     if(this.auth.getType() != "admin") {
       this.router.navigateByUrl("/home")
     }
+
+    this.prenom = this.auth.getPrenom();
 
     this.getAllCollab();
   }

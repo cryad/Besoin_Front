@@ -13,7 +13,9 @@ export class PopUpAdminComponent implements OnInit{
     collaborateurs: any;
     collabNotInProjets: any[] = [];
     adminNotInProjets: any[] = [];
+    adminInProjets: any[] = [];
     respoFinancierNotInProjets: any[] = [];
+    respoFinancierInProjets: any[] = [];
     selectedOption: any;
     selectedRole: any;
     isValide: any;
@@ -31,32 +33,76 @@ export class PopUpAdminComponent implements OnInit{
 
     ngOnInit() {
 
-        this.messageService.sendGet("collab/In/"+this.projet.codeProjet).subscribe(res => {
-          this.collaborateurs = res.data;
-        })
+      this.getAdminNotInProjet(this.projet.codeProjet);
+      this.getAdminInProjet(this.projet.codeProjet);
+      this.getRespoFinancierNotInProjet(this.projet.codeProjet);
+      this.getRespoFinancierInProjet(this.projet.codeProjet);
+      this.getCollaborateursInProjet(this.projet.codeProjet);
+      this.getCollaborateursNotInProjet(this.projet.codeProjet);
 
-        this.messageService.sendGet("collab/notIn/"+this.projet.codeProjet).subscribe(res => {
-          console.log(res.data)
-          this.collabNotInProjets = res.data;
-        })
-
-        this.messageService.sendGet("admin/notIn/"+this.projet.codeProjet).subscribe(res => {
-          this.adminNotInProjets = res.data;
-        })
-
-        this.messageService.sendGet("respoFinancier/notIn/"+this.projet.codeProjet).subscribe(res => {
-          this.respoFinancierNotInProjets = res.data;
-        })
 
     }
 
+
+    //Get admin not in projet
+    getAdminNotInProjet(codeProjet: any) {
+      this.messageService.sendGet("admin/notIn/"+this.projet.codeProjet).subscribe(res => {
+        this.adminNotInProjets = res.data;
+      })
+    }
+
+    //get admin in projet
+    getAdminInProjet(codeProjet: any) {
+      this.messageService.sendGet("admin/In/"+this.projet.codeProjet).subscribe(res => {
+        this.adminInProjets = res.data;
+      })
+    }
+
+
+    //Get respo financier not in projet
+    getRespoFinancierNotInProjet(codeProjet: any) {
+      this.messageService.sendGet("respoFinancier/notIn/"+this.projet.codeProjet).subscribe(res => {
+        this.respoFinancierNotInProjets = res.data;
+      })
+    }
+
+    //Get respo financier in projet
+
+    getRespoFinancierInProjet(codeProjet: any) {
+      this.messageService.sendGet("respoFinancier/In/"+this.projet.codeProjet).subscribe(res => {
+        this.respoFinancierInProjets = res.data;
+      })
+    }
+
+    //Get collaborateurs in projet
+    getCollaborateursInProjet(codeProjet: any) {
+      this.messageService.sendGet("collab/In/"+this.projet.codeProjet).subscribe(res => {
+        this.collaborateurs = res.data;
+
+      })
+    }
+
+
+
+    //Get collaborateurs not in projet
+    getCollaborateursNotInProjet(codeProjet: any) {
+      this.messageService.sendGet("collab/notIn/"+this.projet.codeProjet).subscribe(res => {
+        this.collabNotInProjets = res.data;
+      })
+
+      
+    
+    }
+
+
     addCollab() {
       this.messageService.sendPost("besoin/assign", {codeCollab: this.selectedOption.codeCollab, codeProjet: this.projet.codeProjet, montantB: -1}).subscribe(res => {
-        this.collaborateurs.push({codeCollab: this.selectedOption.codeCollab, nom: this.selectedOption.nom, prenom: this.selectedOption.prenom});
-
-        this.collabNotInProjets = this.collabNotInProjets.filter((collabNotInProjet: any) => collabNotInProjet.codeCollab !== this.selectedOption.codeCollab);
-        this.adminNotInProjets = this.adminNotInProjets.filter((adminNotInProjet: any) => adminNotInProjet.codeCollab !== this.selectedOption.codeCollab);
-        this.respoFinancierNotInProjets = this.respoFinancierNotInProjets.filter((respoFinancierNotInProjet: any) => respoFinancierNotInProjet.codeCollab !== this.selectedOption.codeCollab);
+        this.getAdminNotInProjet(this.projet.codeProjet);
+        this.getAdminInProjet(this.projet.codeProjet);
+        this.getRespoFinancierNotInProjet(this.projet.codeProjet);
+        this.getRespoFinancierInProjet(this.projet.codeProjet);
+        this.getCollaborateursNotInProjet(this.projet.codeProjet);
+        this.getCollaborateursInProjet(this.projet.codeProjet);
 
         this.selectedOption = "";
 

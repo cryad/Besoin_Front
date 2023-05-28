@@ -19,7 +19,7 @@ export class AuthServiceModule {
       localStorage.setItem("username", compte["username"])
       localStorage.setItem("nom", compte["nom"])
       localStorage.setItem("prenom", compte["prenom"])
-
+      
       localStorage.setItem("authentificated", this.authentificated + "")
 
       console.log(this.authentificated)
