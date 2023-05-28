@@ -3,39 +3,48 @@
 
 
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-12 col-sm-8 col-lg-6">
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-8 col-lg-6">
 
-          <!-- Section Heading-->
-          <div class="section_heading text-center wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-            <h1> Bienvenue Admin</h1>
-            <h3>Consultez, Révaluer les Dotations de vos Collaborateurs</h3>
-            <div class="line"></div>
+      <!-- Section Heading-->
+      <div class="section_heading text-center wow fadeInUp" data-wow-delay="0.2s"
+        style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+        <h1> Bienvenue Admin</h1>
+        <h3 *ngIf="Collaborateurs.length > 0">Consultez, Révaluer les Dotations de vos Collaborateurs</h3>
+        <h3 class="center" *ngIf="Collaborateurs.length == 0">Vous avez aucun financement attribué</h3>
+        <div class="line"></div>
+      </div>
+    </div>
+
+  </div>
+  <div class="row">
+
+    <!-- Single Advisor-->
+    <div class="col-12 col-sm-6 col-lg-3" *ngFor="let collab of Collaborateurs">
+      <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.3s"
+        style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+        <!-- Team Thumb-->
+        <div class="advisor_thumb"><img src="{{getDiceBearAvatar(collab.prenom + ' ' + collab.nom)}}" alt="">
+          <!-- Info-->
+          <div class="info">
+            <h3>{{collab.dotation}} <i style="font-size:24px" class="fa">&#xf155;</i></h3>
           </div>
         </div>
-
-    </div>
-        <div class="row">
-
-          <!-- Single Advisor-->
-          <div class="col-12 col-sm-6 col-lg-3" *ngFor="let collab of Collaborateurs">
-            <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
-              <!-- Team Thumb-->
-              <div class="advisor_thumb"><img src="{{getDiceBearAvatar(collab.prenom + ' ' + collab.nom)}}" alt="">
-                <!-- Info-->
-                <div class="info"> <h3>{{collab.dotation}} <i style="font-size:24px" class="fa">&#xf155;</i></h3></div>
-              </div>
-              <!-- Team Details-->
-              <div class="single_advisor_details_info">
-                <h3 style="text-transform: uppercase;">{{collab.prenom}} {{collab.nom}}</h3>
-                <div class="form-outline" style="width: auto;">
-                    <p style="text-align: center;">Révaluer la dotation</p>
-                    <input min="1" type="number" id="typeNumber" class="form-control" [(ngModel)]="collab.dotationTemp"/>
-                    <button type="button" class="btn btn-light" (click)="updateDotation(collab, collab.dotationTemp)" style="margin-top: 10px;">Confirmer</button>
-                </div>
-              </div>
-            </div>
+        <!-- Team Details-->
+        <div class="single_advisor_details_info">
+          <h3 style="text-transform: uppercase;">{{collab.prenom}} {{collab.nom}}</h3>
+          <div class="form-outline" style="width: auto;">
+            <p style="text-align: center;">Révaluer la dotation</p>
+            <input min="1" type="number" id="typeNumber" class="form-control" [(ngModel)]="collab.dotationTemp" />
+            <button type="button" class="btn btn-light" (click)="updateDotation(collab, collab.dotationTemp)"
+              style="margin-top: 10px;">Confirmer</button>
           </div>
-
         </div>
       </div>
+    </div>
+
+  </div>
+  <div *ngIf="Collaborateurs.length == 0">
+    <img class="center-image" src="../../assets/images/noProjet.png">
+  </div>
+</div>

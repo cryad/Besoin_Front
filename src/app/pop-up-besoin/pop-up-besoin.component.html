@@ -1,31 +1,34 @@
-<table class="table table-bordered" >
-    <thead>
-      <tr>
-        <th scope="col">#codeBesoin</th>
-        <th scope="col">Description</th>
-        <th scope="col">Montant</th>
-        <th scope="col">Statut</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let besoin of Besoins">
-        <th scope="row">{{besoin.codeBesoin}}</th>
-        <td>{{besoin.descriptionB}}</td>
-        <td>
+<div>
+  <div class="margin">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">#codeBesoin</th>
+          <th scope="col">Description</th>
+          <th scope="col">Montant</th>
+          <th scope="col">Statut</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let besoin of Besoins">
+          <th scope="row">{{besoin.codeBesoin}}</th>
+          <td>{{besoin.descriptionB}}</td>
+          <td>
             <div class="input-group mb-3">
-                <div class="input-group-prepend">
+              <div class="input-group-prepend">
                 <span class="input-group-text">{{besoin.montantB}} $</span>
-                </div>
+              </div>
             </div>
-        </td>
-        <td>
-            <button type="button" class="btn btn-outline-danger btn-rounded" *ngIf="!besoin.valideB" data-mdb-ripple-color="dark" (click)="validateBesoin(besoin)">Clique pour valider</button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-outline-danger btn-rounded" *ngIf="!besoin.valideB"
+              data-mdb-ripple-color="dark" (click)="validateBesoin(besoin)">Clique pour valider</button>
             <div class="alert alert-success" *ngIf="besoin.valideB" role="alert">
-                Ce besoin est validé
+              Ce besoin est validé
             </div>
-        </td>
-      </tr>
-    </tbody>
-</table>
-
-
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

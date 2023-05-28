@@ -10,6 +10,24 @@
         </tr>
       </thead>
       <tbody>
+        <tr><td  class="table-warning" colspan="4">Administrateur</td></tr>
+        <tr *ngIf="admins.length == 0"><td colspan="4" class="text-danger" >Aucun</td></tr>
+        <tr *ngFor="let admin of admins">
+          <th scope="row">{{admin.codeCollab}}</th>
+          <td>{{admin.nom}}</td>
+          <td>{{admin.prenom}}</td>
+          <td>{{admin.dotation}}</td>
+        </tr>
+        <tr><td class="table-success" colspan="4">Responsable Financier</td></tr>
+        <tr *ngIf="respoFinanciers.length == 0"><td colspan="4" class="text-danger">Aucun</td></tr>
+        <tr *ngFor="let respoFinancier of respoFinanciers">
+          <th scope="row">{{respoFinancier.codeCollab}}</th>
+          <td>{{respoFinancier.nom}}</td>
+          <td>{{respoFinancier.prenom}}</td>
+          <td>{{respoFinancier.dotation}}</td>
+        </tr>
+        <tr><td class="table-primary" colspan="4">Collaborateur</td></tr>
+        <tr *ngIf="collaborateurs.length == 0"><td colspan="4" class="text-danger">Aucun</td></tr>
         <tr *ngFor="let collaborateur of collaborateurs">
           <th scope="row">{{collaborateur.codeCollab}}</th>
           <td>{{collaborateur.nom}}</td>
@@ -18,23 +36,23 @@
         </tr>
         <tr class="table-color-add">
           <td colspan="4">
-            <h3>Choisissez le Role</h3>
+            <h3>Choisissez qui vous souhaitez ajouter</h3>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="collab" [(ngModel)]="selectedRole">
-              <label class="form-check-label" for="exampleRadios2" style="color: rgb(13, 124, 204);">
-                Collaborateur
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="admin" [(ngModel)]="selectedRole">
+              <label class="form-check-label" for="exampleRadios1" class="text-warning">
+                Administateur
               </label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="respoFinancier" [(ngModel)]="selectedRole">
-              <label class="form-check-label" for="exampleRadios2" style="color: rgb(48, 131, 81);">
+              <label class="form-check-label" for="exampleRadios2" class="text-success">
                 Responsable Financier
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="admin" checked [(ngModel)]="selectedRole">
-              <label class="form-check-label" for="exampleRadios1" style="color: #601a1a;">
-                Administateur
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="collab" [(ngModel)]="selectedRole">
+              <label class="form-check-label" for="exampleRadios2" class="text-primary">
+                Collaborateur
               </label>
             </div>
           </td>
